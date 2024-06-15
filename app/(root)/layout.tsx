@@ -1,14 +1,11 @@
 import React from 'react'
+import { Children } from 'react'
 
-const RootLayout = () => {
+const RootLayout = ({children}: {children: React.ReactNode}) => {
   return (
-<<<<<<< HEAD
-    <div>RootLayout</div>
-=======
     <main>
         {children}
     </main>
->>>>>>> 4d985069d7236c129c8bb616a880665ea36d25cd
   )
 }
 
