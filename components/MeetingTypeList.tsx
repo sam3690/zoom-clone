@@ -3,12 +3,15 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import HomeCard from './HomeCard'
 import { useRouter } from 'next/navigation'
-
+import MeetingModal from './MeetingModal'
 
 
 const MeetingTypeList = () => {
-    const router = useRouter()
+
+const router = useRouter()
 const [meetingSate, setMeetingSate] = useState<'isScheduleMeeting' | 'isJoinMeeting' | 'isInstantMeeting' | undefined>()
+
+const createMeeting = () => {}
 
   return (
     <section className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4'>
@@ -41,6 +44,15 @@ const [meetingSate, setMeetingSate] = useState<'isScheduleMeeting' | 'isJoinMeet
             description='Join via invitation link'
             handleClick={() => router.push('/recordings')}
             className='bg-yellow-1'
+        />
+
+        <MeetingModal
+            isOpen={meetingSate === 'isInstantMeeting'}
+            onClose={() => setMeetingSate(undefined)}
+            title='Start a New Meeting'
+            className="text-center"
+            buttonText='Start Meeting'
+            handleClick={createMeeting}
         />
     </section>
   )
