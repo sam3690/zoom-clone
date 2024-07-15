@@ -8,11 +8,11 @@ interface HomeCardProps {
     img: string
     title: string
     description: string
-    handleClick?: () => void
+    handleClick: () => void
 }
-const HomeCard = ({className, img, title, description}: HomeCardProps) => {
+const HomeCard = ({className, img, title, description, handleClick}: HomeCardProps) => {
   return (
-    <div className={cn('px-4 py-6 justify-between w-full xl:max-w-[270px] min-h-[260px] rounded-[14px] cursor-pointer', className)} onClick={() => {}}>
+    <div className={cn('px-4 py-6 justify-between w-full xl:max-w-[270px] min-h-[260px] rounded-[14px] cursor-pointer', className)} onClick={handleClick}>
             <div className='flex-center glassmorphism size-12 rounded-[10px]'>
                 <Image
                     src={img}
