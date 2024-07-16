@@ -103,9 +103,19 @@ const createMeeting = async () => {
                 isOpen={meetingSate === 'isScheduleMeeting'}
                 onClose={() => setMeetingSate(undefined)}
                 title='Schedule a Meeting'
+                handleClick={createMeeting}
+            />
+        ) : (
+            <MeetingModal
+                isOpen={meetingSate === 'isScheduleMeeting'}
+                onClose={() => setMeetingSate(undefined)}
+                title='Meetinng Scheduled'
                 className="text-center"
                 buttonText='Start Meeting'
-                handleClick={createMeeting}
+                handleClick={() => {
+                    // navigator.clipboard.writeText(meetingLink)
+                    // toast({ title: "Meeting link copied to clipboard", })
+                }}
             />
         )}
         <MeetingModal
