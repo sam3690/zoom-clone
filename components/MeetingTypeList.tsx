@@ -98,6 +98,16 @@ const createMeeting = async () => {
             className='bg-yellow-1'
         />
 
+        {!callDetails ? (
+            <MeetingModal
+                isOpen={meetingSate === 'isScheduleMeeting'}
+                onClose={() => setMeetingSate(undefined)}
+                title='Schedule a Meeting'
+                className="text-center"
+                buttonText='Start Meeting'
+                handleClick={createMeeting}
+            />
+        )}
         <MeetingModal
             isOpen={meetingSate === 'isInstantMeeting'}
             onClose={() => setMeetingSate(undefined)}
