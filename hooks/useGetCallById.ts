@@ -14,7 +14,7 @@ export const useGetCallById = (id: string | string[]) => {
         const loadCall = async () => {
             const {calls} = await client.queryCalls({
                 filter_conditions:{
-                    id: id
+                    id
                 }
             })
 
@@ -22,6 +22,8 @@ export const useGetCallById = (id: string | string[]) => {
 
             setIsCallLoading(false)
         }
+
+        loadCall()
     }, [client, id])
 
     return { call, isCallLoading }

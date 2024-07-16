@@ -1,3 +1,5 @@
+'use client'
+import Loader from '@/components/Loader'
 import MeetingRoom from '@/components/MeetingRoom'
 import MeetingSetup from '@/components/MeetingSetup'
 import { useGetCallById } from '@/hooks/useGetCallById'
@@ -10,12 +12,13 @@ const {user, isLoaded } = useUser()
 const [isSetupComplete, setIsSetupComplete] = useState(false)
 const { call, isCallLoading } = useGetCallById(id)
 
+if( !user || isCallLoading ) return <Loader />
   return (
     <main className='h-screen w-full'>
-      <StreamCall>
+      <StreamCall call={call}>
         <StreamTheme >
           {!isSetupComplete ? (
-            <MeetingSetup/>
+            <MeetingSetup setIsSetupComplete={setIsSetupComplete}/>
           ): (
             <MeetingRoom/>
           )}
