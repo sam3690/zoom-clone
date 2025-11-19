@@ -66,7 +66,7 @@ const CallLayout = () => {
 
           <DropdownMenuContent className='border-dark-1 bg-dark-1 text-white'>
             {['Grid', 'Speaker-Left', 'Speaker-Right'].map((item, index) => (
-            <div>
+            <div key={index}>
               <DropdownMenuItem
               className='cursor-pointer' onClick={() => {
                 setLayout(item.toLowerCase() as CallLayoutType)

@@ -1,8 +1,12 @@
 import React from 'react'
 
-const CallList = () => {
+interface CallListProps {
+  type: 'upcoming' | 'previous' | 'recordings'
+}
+
+const CallList = ({ type }: CallListProps) => {
   return (
-    <div>CallList</div>
+    <div>CallList - {type}</div>
   )
 }
 

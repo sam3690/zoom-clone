@@ -23,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <ClerkProvider appearance={{
+    <ClerkProvider
+      appearance={{
         layout: {
           logoImageUrl: '/icons/yoom-logo.svg',
           socialButtonsVariant: 'iconButton',
@@ -36,12 +36,14 @@ export default function RootLayout({
           colorInputBackground: '#252a41',
           colorInputText: '#fff',
         }
-      }}>
+      }}
+    >
+      <html lang="en">
         <body className={`${inter.className} bg-dark-2`}>
           {children}
           <Toaster />
-          </body>
-      </ClerkProvider>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
