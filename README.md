@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎥 Zoom Clone — Video Conferencing App
 
-## Getting Started
+A full-featured real-time video conferencing application built from scratch — replicating core Zoom functionality using WebRTC for peer-to-peer video/audio and Socket.io for live signaling.
 
-First, run the development server:
+**Live Demo:** [zoom-clone-six-mu.vercel.app](https://zoom-clone-six-mu.vercel.app/)
+
+---
+
+## 📸 Preview
+
+> _Add a screenshot of the video conference UI here_
+
+---
+
+## ✨ Features
+
+- 📹 **Real-time video & audio** — peer-to-peer connections via WebRTC
+- 🔴 **Live room management** — create and join rooms with unique room IDs
+- 🔁 **WebSocket signaling** — low-latency connection negotiation with Socket.io
+- 🔇 **Mute / camera toggle** — control your own audio and video mid-call
+- 👥 **Multi-participant support** — multiple users in a single room
+- 📱 **Responsive UI** — works on desktop and mobile browsers
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js · React |
+| Real-time video | WebRTC (RTCPeerConnection) |
+| Signaling | Socket.io · WebSockets |
+| Styling | Tailwind CSS |
+| Deployment | Vercel (frontend) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+
+### Installation
+
+```bash
+git clone https://github.com/sam3690/zoom-clone.git
+cd zoom-clone
+npm install
+```
+
+### Run Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> ⚠️ WebRTC requires HTTPS for camera/microphone access in production. Locally, `localhost` is treated as secure by browsers.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+---
 
-## Learn More
+## 🏗 Architecture
 
-To learn more about Next.js, take a look at the following resources:
+```
+User A (Browser)                    User B (Browser)
+     │                                    │
+     │──── join room ────▶  Socket.io  ◀──── join room ────│
+     │                      Signaling                       │
+     │◀─── SDP offer/answer + ICE candidates ─────────────▶│
+     │                                    │
+     └──────── WebRTC P2P Connection ─────┘
+               (video / audio stream)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The Socket.io server handles only **signaling** (connection negotiation). Once connected, all media flows directly peer-to-peer via WebRTC — the server carries no video data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📁 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+zoom-clone/
+├── app/
+│   ├── page.tsx            # Landing page — create/join room
+│   ├── room/[id]/          # Video conference room
+│   └── layout.tsx
+├── components/
+│   ├── VideoGrid.tsx       # Renders participant video streams
+│   ├── Controls.tsx        # Mute, camera, leave buttons
+│   └── RoomEntry.tsx       # Room ID input & join flow
+├── lib/
+│   ├── socket.ts           # Socket.io client setup
+│   └── webrtc.ts           # RTCPeerConnection helpers
+├── server/
+│   └── index.ts            # Socket.io signaling server
+├── public/
+└── README.md
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## 🔑 Key Engineering Concepts
+
+- **WebRTC signaling flow** — SDP offer/answer exchange and ICE candidate trickle via Socket.io
+- **RTCPeerConnection** — managing multiple peer connections for multi-participant rooms
+- **MediaStream API** — capturing and displaying local and remote audio/video tracks
+- **Room lifecycle** — handling join, leave, and reconnection events gracefully
+
+---
+
+## 🛣 Roadmap
+
+- [ ] Screen sharing
+- [ ] Chat panel
+- [ ] Recording
+- [ ] TURN server for NAT traversal in restrictive networks
+
+---
+
+## 👤 Author
+
+**Usama Ayoub** — Backend Developer  
+[LinkedIn](https://www.linkedin.com/in/usama-ayoub-972822405/) · [Portfolio](https://sam3690.github.io/UsamaAyoub/) · usamabinayoub@gmail.com
+
+---
+
+## 📄 License
+
+MIT License
